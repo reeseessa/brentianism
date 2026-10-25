@@ -904,3 +904,20 @@ h2, h3, [id]{scroll-margin-top:90px}
   
   .octane-day-card{flex-direction:column;text-align:center;padding:16px}
 }
+
+/* verses */
+.verse{
+  border-left:2px solid rgba(56,189,248,.25);
+  padding:6px 0 6px 18px;margin:14px 0;
+}
+.v-ref{
+  font-size:.7rem;letter-spacing:.1em;color:var(--gold);
+  font-weight:700;display:block;margin-bottom:4px;font-family:monospace;
+}
+.verse .gr{
+  display:block;font-family:Georgia,serif;color:#e6f2ff;
+  font-size:1rem;line-height:1.55;margin-bottom:4px;
+}
+.verse .ru{
+  display:block;color:#9fb4cb;font-size:.93rem;font-style:italic;
+}
