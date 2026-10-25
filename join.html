@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вступить в общину — Брентианизм</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="join.html">
+
+<div id="site-header"></div>
+
+<main>
+
+  <section class="hero" style="padding-bottom:30px">
+    <span class="kicker">ΕΙΣΟΔΟΣ ΕΙΣ ΤΗΝ ΚΟΙΝΟΤΗΤΑ</span>
+    <h1>Вступить в общину</h1>
+    <p class="sub">Join the community · Форма принятия веры</p>
+    <p class="lead">Заполни сию анкету — и получи личную карту верующего Брентианина. Храни её пуще кошелька.</p>
+  </section>
+
+  <section class="block reveal" style="margin-top:20px" id="joinSection">
+    <div class="card">
+      <span class="num">Анкета</span>
+      <h3>Сведения о вступающем</h3>
+
+      <form id="joinForm" class="form-grid" style="margin-top:20px">
+        <div class="field">
+          <label for="name">Имя в миру</label>
+          <input type="text" id="name" placeholder="Например: Риз" required>
+        </div>
+
+        <div class="field">
+          <label for="newName">Имя по вере (необязательно)</label>
+          <input type="text" id="newName" placeholder="Например: Октавиан">
+        </div>
+
+        <div class="field">
+          <label for="octane">Октановое предпочтение</label>
+          <select id="octane">
+            <option value="92">92-й — смиренный и экономный</option>
+            <option value="95" selected>95-й — срединный и благочестивый</option>
+            <option value="100">100-й — совершенный и ревностный</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="cat">Наличие фурри-кота</label>
+          <select id="cat">
+            <option value="yes">Есть, и я его чту</option>
+            <option value="plan">Планирую завести</option>
+            <option value="no">Нет, но мурлыкаю сам</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="fringe">Сторона чёлки</label>
+          <select id="fringe">
+            <option value="right">Правая (по канону)</option>
+            <option value="left">Левая (ересь, но допустимо)</option>
+            <option value="none">Нет чёлки, лыс во славу Брента</option>
+          </select>
+        </div>
+
+        <label class="check">
+          <input type="checkbox" id="agree1" required>
+          <span>Торжественно обещаю не заправляться 92-м в премиум-двигатель, не смешивать топлива и не красть бензин.</span>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" id="agree2" required>
+          <span>Согласен мурлыкать в ответ на приветствие «Γεμίσατε» и участвовать в мурлыканиях по праздникам.</span>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" id="agree3" required>
+          <span>Признаю Собор Фембоев и духовную власть фурри-котов-пророков.</span>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" id="agree4">
+          <span>Согласен получать благословенные скидки и бонусные мурлыкания на указанный бак (необязательно).</span>
+        </label>
+
+        <button class="btn" type="submit" style="justify-self:start">Освятить вступление</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="block reveal" id="certWrap" style="display:none">
+    <div class="certificate" id="certBox"></div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="script.js"></script>
+<script>
+const joinForm = document.getElementById('joinForm');
+const certWrap = document.getElementById('certWrap');
+const certBox  = document.getElementById('certBox');
+
+joinForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const worldName = document.getElementById('name').value.trim() || 'Безымянный';
+  const newName   = document.getElementById('newName').value.trim() || worldName;
+  const octane    = document.getElementById('octane').value;
+  const cat       = document.getElementById('cat').value;
+  const fringe    = document.getElementById('fringe').value;
+
+  const octaneRank = {
+    '92':  'Смиренный Послушник',
+    '95':  'Благочестивый Водитель',
+    '100': 'Ревнитель Полноты',
+  }[octane];
+
+  const catStatus = {
+    'yes':  'Кот-спутник прилагается',
+    'plan': 'Кот в процессе обретения',
+    'no':   'Мурлычет самостоятельно',
+  }[cat];
+
+  const fringeStatus = {
+    'right':'Правая — по канону',
+    'left': 'Левая — под наблюдением',
+    'none': 'Отсутствует — во славу Брента',
+  }[fringe];
+
+  const num  = String(Math.floor(100000 + Math.random()*900000));
+  const date = new Date().toLocaleDateString('ru-RU');
+  const patron = ['Пистолет-Хранитель','Шланг-Утешитель','Колонка-Заступница','Насос-Покровитель'][Math.floor(Math.random()*4)];
+
+  certBox.innerHTML = `
+    <div class="cert-head">ΚΑΡΤΑ ΠΙΣΤΟΥ · Карта верующего</div>
+    <div class="cert-title">Брентианин</div>
+    <div class="cert-name">${newName}</div>
+    <dl>
+      <dt>Имя в миру</dt><dd>${worldName}</dd>
+      <dt>Номер члена</dt><dd>№ ${num}</dd>
+      <dt>Октановый ранг</dt><dd>${octaneRank} (${octane}-й)</dd>
+      <dt>Фурри-кот</dt><dd>${catStatus}</dd>
+      <dt>Чёлка</dt><dd>${fringeStatus}</dd>
+      <dt>Покровитель</dt><dd>${patron}</dd>
+      <dt>Дата вступления</dt><dd>${date}</dd>
+    </dl>
+    <div class="cert-foot">
+      Да хранит тебя Брент, и да не опустеет бак твой.<br>
+      <b style="color:var(--gold);font-style:normal">Γεμίσατε!</b>
+    </div>
+  `;
+
+  certWrap.style.display = 'block';
+  certWrap.scrollIntoView({ behavior:'smooth', block:'center' });
+});
+</script>
+</body>
+</html>

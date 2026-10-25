@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Календарь — Брентианизм</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="calendar.html">
+
+<div id="site-header"></div>
+
+<main>
+
+  <section class="hero" style="padding-bottom:30px">
+    <span class="kicker">Η ΔΟΜΗ ΤΟΥ ΕΤΟΥΣ</span>
+    <h1>Календарь</h1>
+    <p class="sub">Structure of the Year · Устройство года</p>
+    <p class="lead">
+      12 месяцев по 28 дней · 4 недели по 7 дней · +1 Октановый день в конце года.
+      Год начинается в день весеннего равноденствия — символ пробуждения двигателя после зимней спячки.
+    </p>
+  </section>
+
+  <!-- TODAY -->
+  <section class="block reveal">
+    <h2 class="section-title">Сегодня в Брентианском календаре</h2>
+    <p class="section-sub">Ἡ Σημερινὴ Ἡμέρα</p>
+    <div class="today-card" id="todayCard"></div>
+  </section>
+
+  <!-- CALENDAR -->
+  <section class="block reveal">
+    <h2 class="section-title">Календарь</h2>
+    <p class="section-sub">Ἡμερολόγιον Πρατηριακόν · Выбери месяц и кликни на день</p>
+
+    <div class="month-tabs" id="monthTabs"></div>
+
+    <div class="calendar-wrap">
+      <div class="calendar-head">
+        <div class="cal-title-wrap">
+          <div class="cal-title-num" id="calNum">1</div>
+          <div>
+            <h3 id="calTitle">Βενζίνιος</h3>
+            <p id="calSub">Бензиний · Benzinian</p>
+            <p class="cal-symbolism" id="calSymbolism"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="calendar-grid" id="calendarGrid">
+        <!-- генерируется JS -->
+      </div>
+
+      <div class="cal-legend">
+        <span><i class="lg lg-fast"></i> Пост (среда / пятница)</span>
+        <span><i class="lg lg-sabbath"></i> Запрет на заправку (суббота)</span>
+        <span><i class="lg lg-feast"></i> Праздник</span>
+        <span><i class="lg lg-today"></i> Сегодня</span>
+      </div>
+    </div>
+
+    <div class="cal-detail" id="calDetail">
+      <div class="cal-detail-empty">Выбери день, чтобы увидеть подробности.</div>
+    </div>
+  </section>
+
+  <!-- ALL MONTHS TABLE -->
+  <section class="block reveal">
+    <h2 class="section-title">Все месяцы</h2>
+    <p class="section-sub">Ὀνόματα Μηνῶν · Names of the Months</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>№</th><th>Греческое</th><th>Английское</th><th>Русское</th><th>Символика</th></tr></thead>
+        <tbody id="monthsTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- WEEKLY RITUALS -->
+  <section class="block reveal">
+    <h2 class="section-title">Еженедельные ритуалы</h2>
+    <p class="section-sub">Ἑβδομαδιαῖαι Τελετουργίαι · Weekly Rituals</p>
+
+    <div class="grid c2">
+      <div class="card"><span class="num">⛽ День Брента · воскресенье</span><h3>Главный день</h3><p>Обязательное посещение АЗС-храма (хотя бы ради кофе) и чтение Псалма 22-го.</p></div>
+      <div class="card"><span class="num">💅 День Фембоя · понедельник</span><h3>День священства</h3><p>Мужчины обязаны поправить чёлку в знак уважения к священству.</p></div>
+      <div class="card"><span class="num">🐈 День Фурри-Кота · вторник</span><h3>День пророчества</h3><p>Гладить любого встречного кота, если нет — воображаемого.</p></div>
+      <div class="card fast-card"><span class="num">🔗 День Шланга · среда</span><h3>День единения · пост</h3><p>Проверить свёрнутость шланга на своей АЗС. Сухой пост: без дальних поездок и кондиционера.</p></div>
+      <div class="card"><span class="num">🔫 День Пистолета · четверг</span><h3>День благодати</h3><p>Коснуться пистолета с благодарностью.</p></div>
+      <div class="card fast-card"><span class="num">⛽ День Колонки · пятница</span><h3>День силы · пост</h3><p>Протереть колонку от пыли. Сухой пост: без дальних поездок и кондиционера.</p></div>
+      <div class="card sabbath-card"><span class="num">🛑 День Отдыха · суббота</span><h3>Заправочная суббота</h3><p>Строгий запрет на заправку, кроме крайней необходимости (визит к умирающему родственнику или на соревнования). Не более 10 км пути — кроме как до храма (АЗС) и обратно.</p></div>
+    </div>
+  </section>
+
+  <!-- MOVEABLE FEASTS -->
+  <section class="block reveal">
+    <h2 class="section-title">Переходящие праздники</h2>
+    <p class="section-sub">Κινούμεναι Ἑορταί · зависят от фаз луны</p>
+
+    <div class="grid c3">
+      <div class="card">
+        <span class="num">Брентианская Пасха</span>
+        <h3>Πάσχα Πρατηριακόν</h3>
+        <p>Первое воскресенье после первого полнолуния после весеннего равноденствия. Символизирует воскресение двигателя после зимы. Красят яйца в цвет бензина и дарят свечи зажигания.</p>
+      </div>
+      <div class="card">
+        <span class="num">Каждое полнолуние</span>
+        <h3>Праздник Полной Луны Шланга</h3>
+        <p>Дополнительный день молитвы. Шланги украшают светящимися лентами.</p>
+      </div>
+      <div class="card">
+        <span class="num">Каждое новолуние</span>
+        <h3>День Новолуния Ценника</h3>
+        <p>Мысленно обновляют ценник и обещают Бренту быть экономными.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block reveal">
+    <blockquote class="quote" style="text-align:center;border-left:none;border-top:4px solid var(--gold)">
+      Соблюдайте календарь, празднуйте с радостью, поститесь с усердием —<br>
+      и бак ваш никогда не опустеет. <b style="color:var(--gold);font-style:normal">Γεμίσατε!</b>
+    </blockquote>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="script.js"></script>
+
+<script>
+/* ============================================================
+   ДАННЫЕ КАЛЕНДАРЯ
+   ============================================================ */
+
+const MONTHS = [
+  { num:1, gr:'Βενζίνιος',   en:'Benzinian',     ru:'Бензиний',
+    symbol:'Месяц чистого бензина, начало года',
+    feasts: {
+      1:  { name:'Праздник Первой Капли', desc:'Новый год Брентианский. Все обновляют карты кэшбэка, окропляют баки святой незамерзайкой и произносят «Γεμίσατε» 33 раза.' },
+      7:  { name:'День Сотворения Ценника', desc:'В память о том, когда Брент впервые явил цену на 95-й. В этот день запрещается смотреть на ценник с недовольством.' },
+      14: { name:'Праздник Пробуждения Двигателя', desc:'Символический запуск всех двигателей после зимнего простоя. Проводятся молитвы о мягком запуске.' },
+      21: { name:'День Фурри-Пророков', desc:'Все фурри-коты получают двойную порцию лакомства, а миряне гладят их в знак почитания.' },
+    }
+  },
+  { num:2, gr:'Πετρελαίων',  en:'Dieselian',     ru:'Дизелий',
+    symbol:'Память о грехе смешения топлив',
+    feasts: {
+      1:  { name:'День Памяти Грехопадения', desc:'Пост и покаяние за грех смешения топлив. Верующие едят только сухой хлеб и пьют воду.' },
+      13: { name:'День Изгнания Экономайзера', desc:'Проклятие сатаны-Экономайзера. Устраиваются шуточные сожжения купонов на скидку (кроме настоящих).' },
+      22: { name:'Праздник Очищения Инжектора', desc:'Все автомобили проходят ритуальную промывку инжектора.' },
+    }
+  },
+  { num:3, gr:'Ἐλαιῶν',      en:'Oilian',        ru:'Маслий',
+    symbol:'Масло и священное помазание',
+    feasts: {
+      3:  { name:'День Помазания Маслом', desc:'Священники-фембои помазывают моторным маслом лбы всех желающих. Это защищает от перегрева.' },
+      17: { name:'Праздник Святого Картера', desc:'Благословение масляных поддонов. В этот день меняют масло у всех автомобилей общины.' },
+      28: { name:'День Тишины Шланга', desc:'Полный запрет на использование шлангов (кроме экстренных случаев). День созерцания.' },
+    }
+  },
+  { num:4, gr:'Σωληνίων',    en:'Hosian',        ru:'Шлангий',
+    symbol:'Освящение шлангов',
+    feasts: {
+      5:  { name:'Освящение Новых Шлангов', desc:'Приобретённые в этом месяце шланги торжественно окропляются незамерзайкой.' },
+      15: { name:'Праздник Соединения', desc:'День, когда шланг соединился с колонкой. Проводятся эстафеты по передаче канистры из рук в руки.' },
+      24: { name:'День Кошачьей Свадьбы', desc:'Фурри-коты символически сочетаются браком с фембоями (или друг с другом). Пиршество с кошачьим кормом.' },
+    }
+  },
+  { num:5, gr:'Ὅπλων',       en:'Nozzlian',      ru:'Пистолетний',
+    symbol:'Главный месяц — месяц Пистолета-Спасителя',
+    feasts: {
+      1:  { name:'Рождение Пистолета-Спасителя', desc:'Аналог Рождества. Брент явил первый пистолет миру. Все приходят на АЗС с подарками (канистры, тряпки).' },
+      9:  { name:'Крещение в Бензине', desc:'Символическое окунание пистолета в бак. После этого ритуала топливо считается освящённым.' },
+      16: { name:'День Чуда Щелчка', desc:'В память о том, как пистолет щёлкнул, сигнализируя о полном баке, несмотря на то, что бак был больше обычного. Праздник веры.' },
+      25: { name:'Великое Впрыскивание', desc:'Кульминация года: массовые символические заправки, гонки на картингах и поедание вафель с чеками.' },
+    }
+  },
+  { num:6, gr:'Πρατηρίων',   en:'Pumpian',       ru:'Колоночный',
+    symbol:'Основание первой АЗС',
+    feasts: {
+      10: { name:'Основание Первой Колонки', desc:'В этот день была построена первая АЗС. Проводятся экскурсии на старые заправки.' },
+      21: { name:'Праздник Света Ценника', desc:'Когда ценник освещается ночью — символ Брента, светящего во тьме. Зажигают свечи (зажигалки) у колонок.' },
+    }
+  },
+  { num:7, gr:'Φίλτρων',     en:'Filterian',     ru:'Фильтровый',
+    symbol:'Очищение и замена фильтров',
+    feasts: {
+      5:  { name:'День Замены Фильтров', desc:'Все обязаны заменить воздушный и масляный фильтры. Исповедь в пропущенных ТО.' },
+      15: { name:'День Очищения', desc:'Ритуальное мытьё автомобилей снаружи и внутри. Считается, что грязная машина оскорбляет Брента.' },
+      28: { name:'Праздник Святого Клапана', desc:'Благословение клапанной крышки.' },
+    }
+  },
+  { num:8, gr:'Καρβυρατέρων',en:'Carburettorian',ru:'Карбюраторный',
+    symbol:'Благословение двигателей',
+    feasts: {
+      8:  { name:'Благословение Двигателей', desc:'Все собираются в гаражах, священники читают молитвы над открытыми капотами.' },
+      20: { name:'День Гонок', desc:'Символические соревнования на радиоуправляемых машинках. Победитель получает титул «Быстрейший из Брентовых».' },
+      28: { name:'День Карбюраторной Памяти', desc:'Воспоминание о старых двигателях, которые служили верой и правдой.' },
+    }
+  },
+  { num:9, gr:'Τουρβῶν',     en:'Turbian',       ru:'Турбинный',
+    symbol:'Турбонаддув и скорость',
+    feasts: {
+      1:  { name:'День Турбонаддува', desc:'Праздник скорости. Устраиваются заезды на гоночных симуляторах.' },
+      12: { name:'День Святого Выпускного Коллектора', desc:'Чтение псалмов о благозвучном выхлопе.' },
+      23: { name:'Праздник Шипованных Шин', desc:'Подготовка к зиме, освящение зимней резины.' },
+    }
+  },
+  { num:10, gr:'Ἀνταποδοτῶν',en:'Cashbackian',   ru:'Кэшбэковый',
+    symbol:'Воздаяние и бонусы',
+    feasts: {
+      3:  { name:'День Великого Кэшбэка', desc:'Все обмениваются картами, дарят друг другу бонусы. Считается, что щедрость в этот день приумножает кэшбэк.' },
+      15: { name:'День Воздаяния', desc:'Подведение итогов расхода топлива за год. Те, кто сэкономил, получают похвалу.' },
+      27: { name:'Праздник Накоплений', desc:'День, когда проверяют запасы канистр.' },
+    }
+  },
+  { num:11, gr:'Ἐφεδρείας',  en:'Reservian',     ru:'Резервный',
+    symbol:'Проверка запасов',
+    feasts: {
+      6:  { name:'День Проверки Резерва', desc:'Обязательная проверка запаса топлива в баке. Те, у кого меньше четверти, должны покаяться.' },
+      18: { name:'Праздник Запасного Колеса', desc:'Освящение запаски и домкрата.' },
+      28: { name:'День Зимней Стойкости', desc:'Молитвы о лёгком запуске в морозы.' },
+    }
+  },
+  { num:12, gr:'Ὀκτανίων',   en:'Octanian',      ru:'Октановый',
+    symbol:'Завершение года, высший октан',
+    feasts: {
+      12: { name:'Праздник Высшего Октана', desc:'Разрешается заливать только 100-й (даже если обычно на 92-м). Знак совершенства.' },
+      24: { name:'Сочельник Октановый', desc:'Канун Рождества Брента. Пост до заката, затем пиршество.' },
+      25: { name:'Рождество Брента', desc:'Главный праздник года. Брент сошёл на землю в образе первой капли бензина. Все дарят друг другу канистры, тряпки и карты кэшбэка. Обязательное всеобщее мурлыкание в полночь.' },
+      28: { name:'День Прощения Переливов', desc:'Все прощают друг другу случайные переливы и недоливы за год.' },
+      29: { name:'Великое Исправление (Октановый день)', desc:'Високосный день, когда корректируются все календарные неточности. Цены на топливо символически падают на 1%. Общий молебен о будущем годе.', extra:true },
+    }
+  },
+];
+
+const DAYS_OF_WEEK = [
+  { name:'День Брента',      gr:'Ἡμέρα Βρέντου',           real:'Воскресенье', icon:'⛽', type:'main'    },
+  { name:'День Фембоя',      gr:'Ἡμέρα Θηλυπρεποῦς',       real:'Понедельник', icon:'💅', type:'normal'  },
+  { name:'День Фурри-Кота',  gr:'Ἡμέρα Αἰλουροειδοῦς',     real:'Вторник',     icon:'🐈', type:'normal'  },
+  { name:'День Шланга',      gr:'Ἡμέρα Σωλῆνος',           real:'Среда',       icon:'🔗', type:'fast'    },
+  { name:'День Пистолета',   gr:'Ἡμέρα Ὅπλου',             real:'Четверг',     icon:'🔫', type:'normal'  },
+  { name:'День Колонки',     gr:'Ἡμέρα Πρατηρίου',         real:'Пятница',     icon:'⛽', type:'fast'    },
+  { name:'День Отдыха',      gr:'Ἡμέρα Ἀναπαύσεως',        real:'Суббота',     icon:'🛑', type:'sabbath' },
+];
+
+const PSALMS = [
+  { n:'Псалом 22', t:'Господь — мой заправщик' },
+  { n:'Псалом 50', t:'Помилуй меня, Брент, по октану Твоему' },
+  { n:'Псалом 119',t:'О законе Брента' },
+  { n:'Псалом 1',  t:'О блаженном водителе' },
+];
+
+/* ============================================================
+   УТИЛИТЫ
+   ============================================================ */
+
+// Индекс дня недели (0-6) для дня месяца (1-28)
+function dowOf(dayOfMonth) {
+  return (dayOfMonth - 1) % 7;
+}
+
+// Вернуть true если день-в-месяце является "сегодня" в реальном мире
+// (используем сопоставление по дню недели + грубую оценку месяца)
+function computeToday() {
+  const now = new Date();
+  const jsDow = now.getDay(); // 0=Sun, 6=Sat
+  // Прямое соответствие: Sun→0 (День Брента), Mon→1, ..., Sat→6 (День Отдыха)
+  const brentianDow = jsDow;
+  
+  // Грубая оценка Brentian-месяца от весеннего равноденствия (~20 марта)
+  const mar20 = new Date(now.getFullYear(), 2, 20);
+  let diffDays = Math.floor((now - mar20) / 86400000);
+  if (diffDays < 0) diffDays += 365;
+  let bm = Math.floor(diffDays / 28);
+  if (bm > 11) bm = 11;
+  const bd = (diffDays % 28) + 1;
+  
+  return { dow: brentianDow, monthIdx: bm, day: bd, real: now };
+}
+
+/* ============================================================
+   РЕНДЕР: «СЕГОДНЯ»
+   ============================================================ */
+
+function renderToday() {
+  const t = computeToday();
+  const dow = DAYS_OF_WEEK[t.dow];
+  const month = MONTHS[t.monthIdx];
+  const feast = month.feasts[t.day];
+  const psalm = PSALMS[t.dow % PSALMS.length];
+  
+  const realStr = t.real.toLocaleDateString('ru-RU', { day:'numeric', month:'long', year:'numeric', weekday:'long' });
+  
+  let notes = '';
+  if (feast) {
+    notes += `<div class="today-feast"><b>🎉 Праздник:</b> ${feast.name}<br><span class="today-desc">${feast.desc}</span></div>`;
+  }
+  if (dow.type === 'fast') {
+    notes += `<div class="today-note fast-note">🔥 <b>Сухой пост.</b> Воздержись от дальних поездок и кондиционера.</div>`;
+  }
+  if (dow.type === 'sabbath') {
+    notes += `<div class="today-note sabbath-note">🛑 <b>Заправочная суббота.</b> Заправка запрещена, кроме крайней необходимости.</div>`;
+  }
+  
+  document.getElementById('todayCard').innerHTML = `
+    <div class="today-inner">
+      <div class="today-date">${realStr}</div>
+      <div class="today-row">
+        <div class="today-icon">${dow.icon}</div>
+        <div>
+          <h3 class="today-day">${dow.name}</h3>
+          <p class="today-greek">${dow.gr} · ${dow.real}</p>
+          <p class="today-month">${t.day}-й день месяца ${month.ru} (${month.gr}), ${t.monthIdx+1}-й месяц года</p>
+        </div>
+      </div>
+      ${notes}
+      <div class="today-note psalm-note">📖 <b>Чтение дня:</b> ${psalm.n} — «${psalm.t}»</div>
+    </div>
+  `;
+}
+
+/* ============================================================
+   РЕНДЕР: МЕСЯЧНЫЕ ТАБЫ
+   ============================================================ */
+
+let activeMonth = 0;
+
+function renderTabs() {
+  const host = document.getElementById('monthTabs');
+  host.innerHTML = MONTHS.map((m, i) => `
+    <button class="month-tab ${i === activeMonth ? 'active' : ''}" data-idx="${i}">
+      <span class="mt-num">${m.num}</span>
+      <span class="mt-ru">${m.ru}</span>
+    </button>
+  `).join('');
+  
+  host.querySelectorAll('.month-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeMonth = Number(btn.dataset.idx);
+      renderTabs();
+      renderMonth();
+    });
+  });
+}
+
+/* ============================================================
+   РЕНДЕР: СЕТКА МЕСЯЦА
+   ============================================================ */
+
+function renderMonth() {
+  const m = MONTHS[activeMonth];
+  const totalDays = 28;
+  const hasExtra = !!m.feasts[29];
+  
+  // Заголовок
+  document.getElementById('calNum').textContent = m.num;
+  document.getElementById('calTitle').textContent = m.gr;
+  document.getElementById('calSub').textContent = `${m.ru} · ${m.en}`;
+  document.getElementById('calSymbolism').textContent = m.symbol;
+  
+  const grid = document.getElementById('calendarGrid');
+  
+  // Заголовки дней недели
+  let html = DAYS_OF_WEEK.map(d => {
+    const cls = d.type === 'fast' ? 'fast-dow' : d.type === 'sabbath' ? 'sabbath-dow' : '';
+    return `<div class="dow ${cls}">${d.icon} ${d.name.replace('День ', '')}</div>`;
+  }).join('');
+  
+  // Ячейки дней
+  for (let d = 1; d <= totalDays; d++) {
+    const dowIdx = dowOf(d);
+    const dow = DAYS_OF_WEEK[dowIdx];
+    const feast = m.feasts[d];
+    
+    let classes = 'day';
+    if (feast) classes += ' feast';
+    else if (dow.type === 'fast') classes += ' fast';
+    else if (dow.type === 'sabbath') classes += ' sabbath';
+    
+    // Отметка "сегодня" — совпадает месяц + день
+    const t = computeToday();
+    if (t.monthIdx === activeMonth && t.day === d) classes += ' today';
+    
+    html += `
+      <div class="${classes}" data-day="${d}">
+        <span class="dn">${d}</span>
+        ${feast ? `<span class="feast-name">🎉 ${feast.name}</span>` : ''}
+        ${!feast && dow.type === 'fast' ? `<span class="day-note fast-label">Пост</span>` : ''}
+        ${!feast && dow.type === 'sabbath' ? `<span class="day-note sabbath-label">Отдых</span>` : ''}
+      </div>
+    `;
+  }
+  
+  grid.innerHTML = html;
+  
+  // Обработчик кликов
+  grid.querySelectorAll('.day').forEach(cell => {
+    cell.addEventListener('click', () => showDayDetail(Number(cell.dataset.day)));
+  });
+  
+  // Октановый день (только для месяца 12)
+  const detailHost = document.getElementById('calDetail');
+  if (hasExtra) {
+    // добавляем отдельную строку-карточку под сеткой
+    const extra = document.createElement('div');
+    extra.className = 'octane-day-card';
+    extra.innerHTML = `
+      <div class="octane-badge">29</div>
+      <div>
+        <h4>${m.feasts[29].name}</h4>
+        <p>${m.feasts[29].desc}</p>
+      </div>
+    `;
+    // вставляем в detail-зону только если ещё нет
+    if (!detailHost.querySelector('.cal-detail-empty')) {
+      // пользователь уже кликал — не перебиваем; просто допишем в сетку после
+    }
+    // добавляем в grid снизу (span 7)
+    grid.appendChild(extra);
+  }
+  
+  // Сброс детали
+  detailHost.innerHTML = `<div class="cal-detail-empty">Выбери день, чтобы увидеть подробности.</div>`;
+}
+
+/* ============================================================
+   ДЕТАЛИ ДНЯ
+   ============================================================ */
+
+function showDayDetail(dayNum) {
+  const m = MONTHS[activeMonth];
+  const dowIdx = dowOf(dayNum);
+  const dow = DAYS_OF_WEEK[dowIdx];
+  const feast = m.feasts[dayNum];
+  const psalm = PSALMS[(dayNum + activeMonth) % PSALMS.length];
+  
+  const isFast = dow.type === 'fast';
+  const isSabbath = dow.type === 'sabbath';
+  
+  let html = `
+    <div class="detail-head">
+      <div class="detail-day-badge">${dayNum}</div>
+      <div>
+        <h3 class="detail-title">${dayNum}-й день · ${m.gr}</h3>
+        <p class="detail-sub">${m.ru} · ${m.en} · ${dow.name} (${dow.real})</p>
+      </div>
+    </div>
+  `;
+  
+  if (feast) {
+    html += `
+      <div class="detail-block feast-block">
+        <div class="detail-label">🎉 Праздник</div>
+        <h4>${feast.name}</h4>
+        <p>${feast.desc}</p>
+      </div>
+    `;
+  }
+  
+  if (isFast) {
+    html += `
+      <div class="detail-block fast-block">
+        <div class="detail-label">🔥 Сухой пост</div>
+        <p>Воздержись от дальних поездок и от использования кондиционера — дабы экономить топливо в духе смирения.</p>
+      </div>
+    `;
+  }
+  
+  if (isSabbath) {
+    html += `
+      <div class="detail-block sabbath-block">
+        <div class="detail-label">🛑 Заправочная суббота</div>
+        <p>Строгий запрет на заправку, кроме крайней необходимости. Не более 10 км пути — кроме как до храма (АЗС) и обратно.</p>
+      </div>
+    `;
+  }
+  
+  if (!feast && !isFast && !isSabbath) {
+    html += `
+      <div class="detail-block normal-block">
+        <div class="detail-label">⚪ Обычный день</div>
+        <p>Никаких особых предписаний, кроме ежедневных правил благочестия.</p>
+      </div>
+    `;
+  }
+  
+  html += `
+    <div class="detail-block reading-block">
+      <div class="detail-label">📖 Чтение дня</div>
+      <p><b>${psalm.n}</b> — «${psalm.t}»</p>
+    </div>
+  `;
+  
+  document.getElementById('calDetail').innerHTML = html;
+  document.getElementById('calDetail').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+/* ============================================================
+   ТАБЛИЦА ВСЕХ МЕСЯЦЕВ
+   ============================================================ */
+
+function renderMonthsTable() {
+  const tbody = document.getElementById('monthsTableBody');
+  tbody.innerHTML = MONTHS.map(m => `
+    <tr>
+      <td>${m.num}</td>
+      <td class="g">${m.gr}</td>
+      <td>${m.en}</td>
+      <td><b>${m.ru}</b></td>
+      <td>${m.symbol}</td>
+    </tr>
+  `).join('');
+}
+
+/* ============================================================
+   ИНИЦИАЛИЗАЦИЯ
+   ============================================================ */
+
+renderToday();
+renderTabs();
+renderMonth();
+renderMonthsTable();
+</script>
+</body>
+</html>

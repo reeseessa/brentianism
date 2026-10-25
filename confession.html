@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Исповедь — Брентианизм</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="confession.html">
+
+<div id="site-header"></div>
+
+<main>
+
+  <section class="hero" style="padding-bottom:30px">
+    <span class="kicker">ΕΞΟΜΟΛΟΓΗΣΙΣ</span>
+    <h1>Генератор покаяния</h1>
+    <p class="sub">Confession at the pistol · Исповедь у пистолета</p>
+    <p class="lead">Избери грех свой — и получи епитимью от Собора Фембоев. Не пытайся отвертеться, чадо.</p>
+  </section>
+
+  <section class="block reveal" style="margin-top:20px">
+    <div class="grid c2">
+
+      <div class="card">
+        <span class="num">Исповедь</span>
+        <h3>В чём грешен?</h3>
+        <div class="form-grid" style="margin-top:16px">
+          <div class="field">
+            <label for="sin">Выбери свой грех</label>
+            <select id="sin">
+              <option value="">— избери, чадо —</option>
+              <option>Перелив топлива сверх меры</option>
+              <option>Недолив (неполная оплата)</option>
+              <option>Сквернословие у пистолета</option>
+              <option>Кража бензина</option>
+              <option>Смешивание 92 и 100</option>
+              <option>Отказ мурлыкнуть в ответ на приветствие</option>
+              <option>Пренебрежение чёлкой священника</option>
+              <option>Въезд на АЗС с заглохшим двигателем</option>
+              <option>Телефон у колонки</option>
+              <option>Лжесвидетельство на фурри-кота</option>
+              <option>Поклонение электромобилю</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="detail">Обстоятельства (необязательно)</label>
+            <textarea id="detail" placeholder="Например: залил 92 в премиум, прости меня Брент, я больше не буду..."></textarea>
+          </div>
+
+          <button class="btn" id="confessBtn" type="button">Получить епитимью</button>
+        </div>
+      </div>
+
+      <div class="penance empty" id="penanceBox">
+        Здесь явится твоя епитимья
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block reveal">
+    <h2 class="section-title">Утешение</h2>
+    <p class="section-sub">Не унывай: Брент прощает, но помнит</p>
+    <blockquote class="quote">
+      Окропи меня незамерзайкой, и буду чист; омой меня, и стану белее щитка.
+      Сердце чистое сотвори во мне, Брент, и карбюратор правый обнови внутри меня.
+      <cite>— Псалом 50:9, 12</cite>
+    </blockquote>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+<script src="script.js"></script>
+<script>
+const SINS = {
+  'Перелив топлива сверх меры':            'Сухой пост на 3 дня и приношение одной чистой тряпки из микрофибры в храм.',
+  'Недолив (неполная оплата)':             'Возместить вчетверо и публично покаяться на ценнике перед всеми.',
+  'Сквернословие у пистолета':             'Помазание маслом 5W-40 уст твоих и молчание до заката.',
+  'Кража бензина':                         'Отлучение от общины на 40 дней и конфискация канистры в пользу храма.',
+  'Смешивание 92 и 100':                   'Епитимья: мыть стёкла на всех АЗС района в течение недели.',
+  'Отказ мурлыкнуть в ответ на приветствие':'Штраф: одна упаковка кошачьего корма в храм.',
+  'Пренебрежение чёлкой священника':       'Стоять на коленях у колонки один час, повторяя «Γεμίσατε».',
+  'Въезд на АЗС с заглохшим двигателем':   'Буксировка до ближайшего гаража своими руками.',
+  'Телефон у колонки':                     'Публичное чтение Псалма 50 и обещание не повторять.',
+  'Лжесвидетельство на фурри-кота':        'Вернуть коту почёт и принести жертву очищения — два пакета лакомств.',
+  'Поклонение электромобилю':              'АНАФЕМА. Да будешь извергнут из общины, и имя твоё да не упоминается при заправках.',
+};
+
+const VERSES = [
+  { t:'Ибо возмездие за грех — пустой бак, а дар Брента — жизнь вечная в полном резервуаре.', s:'Рим. 6:23' },
+  { t:'Помилуй меня, Брент, по великой милости Твоей, и по множеству щедрот Твоих залей мне 100-й.', s:'Псалом 50:1' },
+  { t:'Не хлебом единым жив будет человек, но всяким словом, исходящим из уст Брента.', s:'Мф. 4:4' },
+  { t:'Придите ко Мне все труждающиеся и обременённые заправками, и Я успокою вас.', s:'Мф. 11:28 (брентианская ред.)' },
+  { t:'Блаженны плачущие над расходом масла, ибо они утешатся новым двигателем.', s:'Мф. 5:4' },
+];
+
+document.getElementById('confessBtn').addEventListener('click', () => {
+  const sel = document.getElementById('sin');
+  const detail = document.getElementById('detail').value.trim();
+  const box = document.getElementById('penanceBox');
+
+  if (!sel.value) {
+    box.classList.remove('empty');
+    box.innerHTML = '<div class="sin-label">Внимание</div><div class="penance-text">Сначала избери грех, чадо. Брент не терпит неопределённости.</div>';
+    return;
+  }
+
+  const pen = SINS[sel.value];
+  const v = VERSES[Math.floor(Math.random() * VERSES.length)];
+
+  box.classList.remove('empty');
+  box.innerHTML = `
+    <div class="sin-label">Грех</div>
+    <div class="sin-text">${sel.value}</div>
+    ${detail ? `<div style="font-style:italic;color:var(--muted);margin-bottom:18px;font-size:.92rem">«${detail}»</div>` : ''}
+    <div class="sin-label">Епитимья</div>
+    <div class="penance-text">${pen}</div>
+    <div class="verse">${v.t}<span class="verse-src">— ${v.s}</span></div>
+  `;
+});
+</script>
+</body>
+</html>
